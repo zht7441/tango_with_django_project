@@ -20,6 +20,8 @@ def index(request):
 
 def about(request):
  context_dict = {'boldmessage': 'This tutorial has been put together by Haotian Zheng'}
+ print(request.method)
+ print(request.user)
  return render(request, 'rango/about.html', context=context_dict)
 
 def show_category(request, category_name_slug):
@@ -51,7 +53,6 @@ def add_page(request, category_name_slug):
     category = Category.objects.get(slug=category_name_slug)
   except Category.DoesNotExist:
     category = None
-# You cannot add a page to a Category that does not exist...
   if category is None:
     return redirect('/rango/')
   form = PageForm()
